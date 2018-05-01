@@ -30,7 +30,7 @@ namespace AkaNewMedia.Pages
         /// <summary>
         /// Desc:Method is used to fill all the mandatory fields that are on registeration page and click on Continue.
         /// </summary>
-        public void FilledMandatoryFields(DataRow dataRow)
+        public void FillMandatoryFields(DataRow dataRow)
         {
             try
             {

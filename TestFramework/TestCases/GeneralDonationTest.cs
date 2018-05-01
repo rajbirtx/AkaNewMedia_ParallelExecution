@@ -25,7 +25,7 @@ namespace TestFramework.TestCases
                 PageFactory.InitElements(driver, lPage);
                 DonatePage donatePage = lPage.ClickDonateButton();
                 GeneralDonationPage generalDonationPage = donatePage.ClickOnGeneralButtonAndContinue();
-                generalDonationPage.FilledMandatoryFields(dataRow);
+                generalDonationPage.FillMandatoryFields(dataRow);
                 generalDonationPage.VerifyAllTheFiledsAndClickOnEdit(dataRow);
                 generalDonationPage.UpdateSomeFieldsAndContinue(dataRow);
                 generalDonationPage.VerifyTheFieldsAndClickonPaymentProcess(dataRow);

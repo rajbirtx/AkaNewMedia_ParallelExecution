@@ -70,7 +70,7 @@ namespace AkaNewMedia.ElementRepository
         public static By validation_ErrorMessage = By.ClassName("ErrorMessage");
         public static By lbl_DonateNow = By.XPath("//*[@id='raisinRegion_97']/p[1]");
         public static By td_TributeClick = By.XPath("//*[@id='raisinRegion_84']/div/table/tbody/tr[3]/td[5]");
-        public static By lbl_DonorProfile = By.XPath("//*[@class='region']/div/p");
+        public static By lbl_DonorProfile = By.XPath("//p[@class='MainTitle' and text()='Donor Profile']");
 
         //Review & Process Payment
         public static By lbl_ctl00_content_ucDonationReview_ucAmount_lblFirstDonation = By.Id("ctl00_content_ucDonationReview_ucAmount_lblFirstDonation");
