@@ -23,6 +23,8 @@ namespace TestFramework
 
     public class BaseTest
     {
+        //public BaseTest(IWebDriver dr) : base(dr) { }
+       
         public IWebDriver driver;
         public ExtentTest test;
         DataTable dt;
@@ -114,11 +116,6 @@ namespace TestFramework
             ExtentTestManager.CreateParentTest(GetType().Name);
         }
 
-        [TearDown]
-        protected void TearDown()
-        {
-            ExtentManager.Instance.Flush();
-            driver.Quit();
-        }
+        
     }
 }

@@ -23,7 +23,7 @@ namespace AkaNewMedia.Pages
         EnumClasses.LogStatus status;
         string screenShotPath = string.Empty;
         /// <summary>
-        /// Desc:Method is used to fill mendatiory fields
+        /// Desc:Method is used to fill mandatory fields
         /// </summary>
         /// <param name="datarow"></param>
         public void fillMandatoryFields(DataRow datarow)
@@ -41,15 +41,17 @@ namespace AkaNewMedia.Pages
                 MethodToAddDataInList("Select Monthly Frequency -" + status);
                 status = ClickOnElementWhenElementFound(InHonourDonation_Locator.Amount);
                 //ClickOnElementWhenElementFound(honourPage.InHonourMonth);
-                selectValueByIndex(InHonourDonation_Locator.InHonourMonth, 1);
+                explicitWait(InHonourDonation_Locator.InHonourMonth, 3000);
+                selectValueByIndex(InHonourDonation_Locator.InHonourMonth, 2);
+                explicitWait(InHonourDonation_Locator.InHonourDay, 3000);
                 selectValueByIndex(InHonourDonation_Locator.InHonourDay, 2);
-                status = ClickOnElementWhenElementFound(InHonourDonation_Locator.NumberOfTimesRadio);
-                MethodToAddDataInList("Select Number Of Times RadioButton-" + status);
-                explicitWait(InHonourDonation_Locator.NumberOfTimesText, 5000);
-                mouseHover(InHonourDonation_Locator.NumberOfTimesText);
-                explicitWait(InHonourDonation_Locator.NumberOfTimesText, 10000);
-                status = SendKeysForWebElement(InHonourDonation_Locator.NumberOfTimesText, datarow["numberoftimes"].ToString());
-                MethodToAddDataInList("Enter specific number of times -" + status);
+                //status = ClickOnElementWhenElementFound(InHonourDonation_Locator.NumberOfTimesRadio);
+                //MethodToAddDataInList("Select Number Of Times RadioButton-" + status);
+                //explicitWait(InHonourDonation_Locator.NumberOfTimesText, 5000);
+                //mouseHover(InHonourDonation_Locator.NumberOfTimesText);
+                //explicitWait(InHonourDonation_Locator.NumberOfTimesText, 10000);
+                //status = SendKeysForWebElement(InHonourDonation_Locator.NumberOfTimesText, datarow["numberoftimes"].ToString());
+                //MethodToAddDataInList("Enter specific number of times -" + status);
                 explicitWait(InHonourDonation_Locator.FundAllocation, 3000);
                 //ClickOnElementWhenElementFound(honourPage.FundAllocation);
                 explicitWait(InHonourDonation_Locator.FundAllocation, 3000);
@@ -115,6 +117,7 @@ namespace AkaNewMedia.Pages
         {
             try
             {
+                lst_detail = new List<string>();
                 status = SendKeysForElement(InHonourDonation_Locator.HonourFirstName, datarow["honourfirstname"].ToString());
                 MethodToAddDataInList("Enter honourfirstname-" + status);
                 status = SendKeysForElement(InHonourDonation_Locator.HonourLastName, datarow["honourlastname"].ToString());
@@ -123,6 +126,7 @@ namespace AkaNewMedia.Pages
                 MethodToAddDataInList("Click on eCardType-" + status);
                 status = ClickOnElementWhenElementFound(InHonourDonation_Locator.ContinueCardType);
                 MethodToAddDataInList("Click on ContinueCardType-" + status);
+                ReportReader.AfterTest(System.Reflection.MethodBase.GetCurrentMethod().Name, lst_detail);
             }
             catch (Exception e)
             {
@@ -137,15 +141,22 @@ namespace AkaNewMedia.Pages
         {
             try
             {
+                lst_detail = new List<string>();
                 status = SendKeysForWebElement(InHonourDonation_Locator.RecipientFirstName, datarow["recipientfirstname"].ToString());
+                MethodToAddDataInList("Enter recipientfirstname-" + status);
                 status = SendKeysForWebElement(InHonourDonation_Locator.RecipientLastName, datarow["recipientlastname"].ToString());
+                MethodToAddDataInList("Enter recipientfirstname-" + status);
                 status = SendKeysForWebElement(InHonourDonation_Locator.RecipientEmail, datarow["recipientemailid"].ToString());
+                MethodToAddDataInList("Enter recipientemailid-" + status);
                 status = ClickOnElementWhenElementFound(InHonourDonation_Locator.AddButton);
+                MethodToAddDataInList("Click on add button-" + status);
                 status = ClickOnElementWhenElementFound(InHonourDonation_Locator.ImageScroller);
+                MethodToAddDataInList("Click on ImageScroller-" + status);
                 status = ClickOnElementWhenElementFound(InHonourDonation_Locator.ImageScroller);
                 //doubleClick(honourPage.ImageScroller);
                 explicitWait(InHonourDonation_Locator.Image6, 4000);
                 status = ClickOnElementWhenElementFound(InHonourDonation_Locator.Image6);
+                MethodToAddDataInList("Click on Image-" + status);
                 //explicitWait(InHonourDonation.TextColorPicker, 6000);
                 //mouseHover(InHonourDonation.TextColorPicker);
                 //explicitWait(InHonourDonation.GreyColor, 5000);
@@ -158,12 +169,16 @@ namespace AkaNewMedia.Pages
                 //driver.SwitchTo().Frame(0);
                 //Thread.Sleep(5000);
                 status = ClickOnElementWhenElementFound(InHonourDonation_Locator.MessageTextArea);
+                MethodToAddDataInList("Click on MessageTextArea-" + status);
                 status = SendKeysForElement(InHonourDonation_Locator.MessageTextArea, datarow["messagetextarea"].ToString());
+                MethodToAddDataInList("Enter messagetextarea-" + status);
                 // SendKeysForElement(InHonourDonation.MessageTextArea, datarow["messagetextarea"].ToString());
                 //driver.SwitchTo().DefaultContent();
                 //getWebElementByLocator(InHonourDonation.MessageTextArea).SendKeys(Keys.Control + Keys.Enter);
                 status = ClickOnElementWhenElementFound(InHonourDonation_Locator.NotifyOption);
+                MethodToAddDataInList("Click on NotifyOption-" + status);
                 status = ClickOnElementWhenElementFound(InHonourDonation_Locator.SaveContinueButton);
+                MethodToAddDataInList("Click on SaveContinueButton-" + status);
                 ReportReader.AfterTest(System.Reflection.MethodBase.GetCurrentMethod().Name, lst_detail);
             }
             catch (Exception e)
@@ -181,18 +196,29 @@ namespace AkaNewMedia.Pages
             {
                 if (dataRow != null)
                 {
-                    Assert.AreEqual(getTextOfWebElementByLocator(InHonourDonation_Locator.FundAllocationText), dataRow["fundallocation"].ToString());
-                    Assert.AreEqual(getTextOfWebElementByLocator(InHonourDonation_Locator.CountryText), dataRow["country"].ToString());
-                    Assert.AreEqual(getTextOfWebElementByLocator(InHonourDonation_Locator.StateText), dataRow["state"].ToString());
-                    Assert.AreEqual(getTextOfWebElementByLocator(InHonourDonation_Locator.EmailText), dataRow["email"].ToString());
-                    Assert.AreEqual(getTextOfWebElementByLocator(InHonourDonation_Locator.CityText), dataRow["city"].ToString());
-                    Assert.AreEqual(getTextOfWebElementByLocator(InHonourDonation_Locator.Address1Text), dataRow["address1"].ToString());
-                    Assert.AreEqual(getTextOfWebElementByLocator(InHonourDonation_Locator.PostalText), dataRow["postal"].ToString());
-                    Assert.AreEqual(getTextOfWebElementByLocator(InHonourDonation_Locator.CardHolderText), dataRow["cardholdername"].ToString());
+                    lst_detail = new List<string>();
+                    status = AssertAreEqual((InHonourDonation_Locator.FundAllocationText), dataRow["fundallocation"].ToString());
+                    MethodToAddDataInList("Verify the fundallocation-" + status);
+                    status = AssertAreEqual((InHonourDonation_Locator.CountryText), dataRow["country"].ToString());
+                    MethodToAddDataInList("Verify the country-" + status);
+                    status = AssertAreEqual((InHonourDonation_Locator.StateText), dataRow["state"].ToString());
+                    MethodToAddDataInList("Verify the state-" + status);
+                    status = AssertAreEqual((InHonourDonation_Locator.EmailText), dataRow["email"].ToString());
+                    MethodToAddDataInList("Verify the email-" + status);
+                    status = AssertAreEqual((InHonourDonation_Locator.CityText), dataRow["city"].ToString());
+                    MethodToAddDataInList("Verify the city-" + status);
+                    status = AssertAreEqual((InHonourDonation_Locator.Address1Text), dataRow["address1"].ToString());
+                    MethodToAddDataInList("Verify the address-" + status);
+                    status = AssertAreEqual((InHonourDonation_Locator.PostalText), dataRow["postal"].ToString());
+                    MethodToAddDataInList("Verify the postal-" + status);
+                    status = AssertAreEqual((InHonourDonation_Locator.CardHolderText), dataRow["cardholdername"].ToString());
+                    MethodToAddDataInList("Verify the CardHoldername-" + status);
                     string tributeName = dataRow["honourfirstname"].ToString() + ' ' + dataRow["honourlastname"].ToString();
-                    Assert.AreEqual(getTextOfWebElementByLocator(InHonourDonation_Locator.TributeHonourNameText), tributeName);
+                    status = AssertAreEqual((InHonourDonation_Locator.TributeHonourNameText), tributeName);
+                    MethodToAddDataInList("Verify the tributeName-" + status);
                 }
                 status = ClickOnElementWhenElementFound(InHonourDonation_Locator.ProcessPaymentButton);
+                MethodToAddDataInList("Click on ProcessPaymentButton-" + status);
                 ReportReader.AfterTest(System.Reflection.MethodBase.GetCurrentMethod().Name, lst_detail);
             }
             catch (Exception e)

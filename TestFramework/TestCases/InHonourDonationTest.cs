@@ -33,5 +33,11 @@ namespace TestFramework.TestCases
         {
             return DataUtil.getData(xls, EnumClasses.SheetNames.InHonourDonation.ToString());
         }
+        [TearDown]
+        protected void TearDown()
+        {
+            ExtentManager.Instance.Flush();
+            driver.Quit();
+        }
     }
 }

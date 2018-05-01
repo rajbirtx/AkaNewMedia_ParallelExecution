@@ -25,6 +25,11 @@ namespace AkaNewMedia.CommonRepository
             htmlReporter.Configuration().ReportName = "Extent/NUnit Samples";
             htmlReporter.Configuration().Theme = Theme.Standard;
             Instance.AttachReporter(htmlReporter);
+            Instance.AddSystemInfo("os", "win7");
+            Instance.AddSystemInfo("Host Name", "LocalHost");
+            Instance.AddSystemInfo("Environment", "QA");
+            Instance.AddSystemInfo("User Name", "Rajbir");
+            Instance.AddSystemInfo("Selenium Version", "3.11");
         }
 
         private ExtentManager()

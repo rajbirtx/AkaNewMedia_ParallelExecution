@@ -43,9 +43,9 @@ namespace AkaNewMedia.Pages
                     explicitWait(GeneralDonation_Locator.rdo_DonationAmount_1, 5000);
                     status = ClickOnElementWhenElementFound(GeneralDonation_Locator.rdo_Amount);
                     MethodToAddDataInList("Select Amount -" + status);
-                    //int value = selectValueByIndex(GeneralDonation_Locator.lst_StartMonth, 1);
-                    ////Assert.AreEqual("1", -1, "Month not selected", MethodToAddDataInList("Month not selected-"+EnumClasses.LogStatus.Failed));
-                    //selectValueByIndex(GeneralDonation_Locator.lst_Day, 1);
+                    int value = selectValueByIndex(GeneralDonation_Locator.lst_StartMonth, 2);
+                    //Assert.AreEqual("1", -1, "Month not selected", MethodToAddDataInList("Month not selected-"+EnumClasses.LogStatus.Failed));
+                    selectValueByIndex(GeneralDonation_Locator.lst_Day, 1);
                     explicitWait(GeneralDonation_Locator.td_FundType, 2000);
                     status = ClickOnElementWhenElementFound(GeneralDonation_Locator.td_FundType);
                     MethodToAddDataInList("Clicking on Fund Allocation -" + status);
@@ -84,13 +84,6 @@ namespace AkaNewMedia.Pages
                     selectValueFromDropdown(GeneralDonation_Locator.ddl_State, dataRow["state"].ToString());
                     status = SendKeysForElement(GeneralDonation_Locator.txt_Postal, dataRow["postal"].ToString());
                     MethodToAddDataInList("Enter postal-" + status);
-                    explicitWait(GeneralDonation_Locator.txt_CreditCardNumber, 10000);
-                    //ClickOnElementWhenElementFound(GeneralDonation_Locator.txt_CreditCardNumber);
-                    status = SendKeysForWebElement(GeneralDonation_Locator.txt_CreditCardNumber, dataRow["creditcardnumber"].ToString());
-                    MethodToAddDataInList("Enter creditcard number-" + status);
-                    explicitWait(GeneralDonation_Locator.txt_CardHolderName, 5000);
-                    status = SendKeysForWebElement(GeneralDonation_Locator.txt_CardHolderName, dataRow["cardholdername"].ToString());
-                    MethodToAddDataInList("Enter cardholder name-" + status);
                     explicitWait(GeneralDonation_Locator.ddl_ExpMonth, 5000);
                     status = ClickOnElementWhenElementFound(GeneralDonation_Locator.ddl_ExpMonth);
                     selectValueFromDropdown(GeneralDonation_Locator.ddl_ExpMonth, dataRow["expmonth"].ToString());
@@ -99,9 +92,15 @@ namespace AkaNewMedia.Pages
                     status = ClickOnElementWhenElementFound(GeneralDonation_Locator.ddl_ExpYear);
                     selectValueFromDropdown(GeneralDonation_Locator.ddl_ExpYear, dataRow["expyear"].ToString());
                     MethodToAddDataInList("Click on expyear-" + status);
+                    explicitWait(GeneralDonation_Locator.txt_CreditCardNumber, 10000);
+                    //ClickOnElementWhenElementFound(GeneralDonation_Locator.txt_CreditCardNumber);
+                    status = SendKeysForWebElement(GeneralDonation_Locator.txt_CreditCardNumber, dataRow["creditcardnumber"].ToString());
+                    MethodToAddDataInList("Enter creditcard number-" + status);
+                    explicitWait(GeneralDonation_Locator.txt_CardHolderName, 5000);
+                    status = SendKeysForWebElement(GeneralDonation_Locator.txt_CardHolderName, dataRow["cardholdername"].ToString());
+                    MethodToAddDataInList("Enter cardholder name-" + status);
                     status = ClickOnElementWhenElementFound(GeneralDonation_Locator.btn_Main_Continue);
                     MethodToAddDataInList("Click on continue button-" + status);
-                    //Assert.IsFalse(IsElementVisible(GeneralDonation_Locator.lbl_DonorProfile), "All the mendatiory fields are not filled");
                     var assertStatus = AssertIsFalse(GeneralDonation_Locator.lbl_DonorProfile);
                     if (assertStatus == EnumClasses.LogStatus.Failed)
                     {
@@ -230,7 +229,7 @@ namespace AkaNewMedia.Pages
             try
             {
                 lst_detail = new List<string>();
-                status = AssertIsTrue(GeneralDonation_Locator.lbl_TransactionCode);
+                status = AssertIsFalse(GeneralDonation_Locator.lbl_TransactionCode);
                 MethodToAddDataInList("Verify the TransectionCode is visible-" + status);
                 status = ClickOnElementWhenElementFound(GeneralDonation_Locator.btn_PaymentStatus_Continue);
                 MethodToAddDataInList("Click on continue button-" + status);

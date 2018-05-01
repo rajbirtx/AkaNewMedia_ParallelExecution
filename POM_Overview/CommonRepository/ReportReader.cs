@@ -49,7 +49,7 @@ namespace AkaNewMedia.CommonRepository
                     {
                         logstatus = Status.Pass;
                     }
-                    ExtentTestManager.GetTest().Log(logstatus, passStringOliveColor(item));
+                    ExtentTestManager.GetTest().Log(logstatus, item);
                     if (logstatus == Status.Fail)
                         ExtentTestManager.GetTest().Fail("Screenshot -", MediaEntityBuilder.CreateScreenCaptureFromPath(screenShotPath).Build());
                 }
