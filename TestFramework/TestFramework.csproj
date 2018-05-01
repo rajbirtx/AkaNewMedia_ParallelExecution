@@ -86,6 +86,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="bin\Debug\nunit_random_seed.tmp" />
+    <None Include="bin\Debug\TestFramework.dll.config" />
     <None Include="ExcelSheet\Aka_Excel_Sheet.xlsx" />
     <None Include="license" />
     <None Include="packages.config" />
@@ -97,6 +99,40 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\Extent.html" />
+    <Content Include="bin\Debug\ExtentReports.dll" />
+    <Content Include="bin\Debug\HtmlAgilityPack.dll" />
+    <Content Include="bin\Debug\HtmlAgilityPack.pdb" />
+    <Content Include="bin\Debug\HtmlAgilityPack.xml" />
+    <Content Include="bin\Debug\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="bin\Debug\MongoDB.Bson.dll" />
+    <Content Include="bin\Debug\MongoDB.Bson.xml" />
+    <Content Include="bin\Debug\MongoDB.Driver.Core.dll" />
+    <Content Include="bin\Debug\MongoDB.Driver.Core.xml" />
+    <Content Include="bin\Debug\MongoDB.Driver.dll" />
+    <Content Include="bin\Debug\MongoDB.Driver.xml" />
+    <Content Include="bin\Debug\Newtonsoft.Json.dll" />
+    <Content Include="bin\Debug\Newtonsoft.Json.xml" />
+    <Content Include="bin\Debug\NPOI.dll" />
+    <Content Include="bin\Debug\NPOI.OOXML.dll" />
+    <Content Include="bin\Debug\NPOI.OpenXml4Net.dll" />
+    <Content Include="bin\Debug\NPOI.OpenXmlFormats.dll" />
+    <Content Include="bin\Debug\NPOI.xml" />
+    <Content Include="bin\Debug\nunit.framework.dll" />
+    <Content Include="bin\Debug\nunit.framework.xml" />
+    <Content Include="bin\Debug\POM_Overview.dll" />
+    <Content Include="bin\Debug\POM_Overview.pdb" />
+    <Content Include="bin\Debug\RazorEngine.dll" />
+    <Content Include="bin\Debug\RazorEngine.xml" />
+    <Content Include="bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="bin\Debug\System.Web.Razor.dll" />
+    <Content Include="bin\Debug\System.Web.Razor.xml" />
+    <Content Include="bin\Debug\TestFramework.dll" />
+    <Content Include="bin\Debug\TestFramework.pdb" />
+    <Content Include="bin\Debug\WebDriver.dll" />
+    <Content Include="bin\Debug\WebDriver.Support.dll" />
+    <Content Include="bin\Debug\WebDriver.Support.xml" />
+    <Content Include="bin\Debug\WebDriver.xml" />
     <Content Include="Drivers\chromedriver.exe" />
     <Content Include="Drivers\geckodriver.exe" />
     <Content Include="Drivers\IEDriverServer.exe" />
@@ -106,6 +142,7 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bin\Release\" />
     <Folder Include="ScreenShots\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
