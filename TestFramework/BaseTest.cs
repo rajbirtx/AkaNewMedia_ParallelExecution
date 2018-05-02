@@ -115,7 +115,5 @@ namespace TestFramework
         {
             ExtentTestManager.CreateParentTest(GetType().Name);
         }
-
-        
     }
 }

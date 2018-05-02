@@ -78,7 +78,6 @@ namespace AkaNewMedia.CommonRepository
         {
             return getWebElementByLocator(aWebElementID).Text;
         }
-
         public IWebElement getElement(By locatorKey)
         {
             IWebElement e = null;
@@ -94,7 +93,6 @@ namespace AkaNewMedia.CommonRepository
             }
             return e;
         }
-
         public EnumClasses.LogStatus ClickOnElementWhenElementFound(By aByValue)
         {
             try
@@ -231,7 +229,6 @@ namespace AkaNewMedia.CommonRepository
                 return -1;
             }
         }
-
         public EnumClasses.LogStatus AssertAreEqual(By expected, string actual)
         {
             try
@@ -319,6 +316,18 @@ namespace AkaNewMedia.CommonRepository
             string actualPath = path.Substring(0, path.LastIndexOf("bin"));
             string reportPath = new Uri(actualPath).LocalPath;
             reportPath = reportPath + "ResultReport\\ExtentReport.html";
+            return reportPath;
+        }
+        /// <summary>
+        /// Desc:Method is used to get generated screenshot's path
+        /// </summary>
+        /// <returns></returns>
+        public static string GetScreenShotPath()
+        {
+            string path = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
+            string actualPath = path.Substring(0, path.LastIndexOf("bin"));
+            string reportPath = new Uri(actualPath).LocalPath;
+            reportPath = reportPath + "ScreenShots";
             return reportPath;
         }
         /// <summary>

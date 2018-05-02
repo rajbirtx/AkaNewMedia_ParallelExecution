@@ -175,8 +175,8 @@ namespace AkaNewMedia.Pages
                 // SendKeysForElement(InHonourDonation.MessageTextArea, datarow["messagetextarea"].ToString());
                 //driver.SwitchTo().DefaultContent();
                 //getWebElementByLocator(InHonourDonation.MessageTextArea).SendKeys(Keys.Control + Keys.Enter);
-                status = ClickOnElementWhenElementFound(InHonourDonation_Locator.NotifyOption);
-                MethodToAddDataInList("Click on NotifyOption-" + status);
+                //status = ClickOnElementWhenElementFound(InHonourDonation_Locator.NotifyOption);
+                //MethodToAddDataInList("Click on NotifyOption-" + status);
                 status = ClickOnElementWhenElementFound(InHonourDonation_Locator.SaveContinueButton);
                 MethodToAddDataInList("Click on SaveContinueButton-" + status);
                 ReportReader.AfterTest(System.Reflection.MethodBase.GetCurrentMethod().Name, lst_detail);
