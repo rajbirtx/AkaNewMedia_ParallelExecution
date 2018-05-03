@@ -133,6 +133,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\Debug\AkaNewMedia.dll" />
+    <Content Include="bin\Debug\AkaNewMedia.pdb" />
     <Content Include="bin\Debug\ExtentReports.dll" />
     <Content Include="bin\Debug\HtmlAgilityPack.dll" />
     <Content Include="bin\Debug\ICSharpCode.SharpZipLib.dll" />
@@ -145,8 +147,6 @@
     <Content Include="bin\Debug\NPOI.OpenXml4Net.dll" />
     <Content Include="bin\Debug\NPOI.OpenXmlFormats.dll" />
     <Content Include="bin\Debug\nunit.framework.dll" />
-    <Content Include="bin\Debug\POM_Overview.dll" />
-    <Content Include="bin\Debug\POM_Overview.pdb" />
     <Content Include="bin\Debug\RazorEngine.dll" />
     <Content Include="bin\Debug\RelevantCodes.ExtentReports.dll" />
     <Content Include="bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll" />
