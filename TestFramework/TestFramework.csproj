@@ -112,8 +112,6 @@
     <Content Include="bin\Debug\NPOI.OpenXml4Net.dll" />
     <Content Include="bin\Debug\NPOI.OpenXmlFormats.dll" />
     <Content Include="bin\Debug\nunit.framework.dll" />
-    <Content Include="bin\Debug\POM_Overview.dll" />
-    <Content Include="bin\Debug\POM_Overview.pdb" />
     <Content Include="bin\Debug\RazorEngine.dll" />
     <Content Include="bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll" />
     <Content Include="bin\Debug\System.Web.Razor.dll" />
