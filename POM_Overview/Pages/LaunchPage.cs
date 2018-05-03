@@ -21,7 +21,7 @@ namespace AkaNewMedia.Pages
         List<string> lst_detail;
         public DonatePage ClickDonateButton()
         {
-            DonatePage donatePage=null;
+            DonatePage donatePage = null;
             try
             {
                 lst_detail = new List<string>();

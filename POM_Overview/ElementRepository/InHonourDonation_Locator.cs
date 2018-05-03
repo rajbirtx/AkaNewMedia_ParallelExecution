@@ -29,7 +29,7 @@ namespace AkaNewMedia.ElementRepository
         public static By AddButton = By.XPath("//input[@id='ctl00_content_ucCardDetail_ucECardDetail_ucRecipients_btnAddRecipient']");
         public static By Image1 = By.XPath("//*[@id='ctl00_content_ucCardDetail_ucECardDetail_ucTemplates_repCards_ctl01_imgPreview']");
         public static By ImageVerify = By.XPath("//*[@id='ecard-contents']/table/tbody/tr/td[1]/img");
-        public static By CloseImagePopup = By.XPath("//div[@id='fancybox-overlay']");
+        public static By CloseImagePopup = By.XPath("//a[@id='fancybox-close']");
         public static By ImageScroller = By.XPath("//*[@id='ecard_scroller']/a[2]/img");
         public static By Image6 = By.XPath("//*[@id='items']/ul/li[6]/span/label");
         public static By TextColorPicker = By.XPath("//*[@id='ctl00_content_ucCardDetail_ucECardDetail_ucTemplates_clrText_label']/a");
@@ -40,6 +40,9 @@ namespace AkaNewMedia.ElementRepository
         public static By NotifyOption = By.XPath("//input[@id='ctl00_content_ucCardDetail_ucECardDetail_ucOptions_chkNotifyOpened']");
         public static By SaveContinueButton = By.XPath("//input[@id='ctl00_content_ucCardDetail_btnContinue']");
         public static By ProcessPaymentButton = By.XPath("//input[@id='ctl00_content_ucDonationReview_btnContinue']");
+
+        public static By lbl_CardDetailsTitle = By.XPath("//h2[@class='MainTitle']");
+
 
         public static By FundAllocationText = By.XPath("//*[@id='ctl00_content_ucDonationReview_ucAmount_lblFund']");
         public static By CountryText = By.XPath("//*[@id='ctl00_content_ucDonationReview_ucProfile_lblCountry']");

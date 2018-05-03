@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using System.Data;
 using System.Configuration;
 using NUnit.Framework;
-using TestFramework.ResultReport;
 using NUnit.Framework.Interfaces;
 using AventStack.ExtentReports;
 
@@ -24,7 +23,7 @@ namespace TestFramework
     public class BaseTest
     {
         //public BaseTest(IWebDriver dr) : base(dr) { }
-       
+
         public IWebDriver driver;
         public ExtentTest test;
         DataTable dt;
@@ -110,10 +109,5 @@ namespace TestFramework
             return dr;
         }
 
-        [OneTimeSetUp]
-        public void Setup()
-        {
-            ExtentTestManager.CreateParentTest(GetType().Name);
-        }
     }
 }

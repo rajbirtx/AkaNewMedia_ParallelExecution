@@ -43,8 +43,10 @@ namespace AkaNewMedia.Pages
                     explicitWait(GeneralDonation_Locator.rdo_DonationAmount_1, 5000);
                     status = ClickOnElementWhenElementFound(GeneralDonation_Locator.rdo_Amount);
                     MethodToAddDataInList("Select Amount -" + status);
+                    threadWait(3000);
                     int value = selectValueByIndex(GeneralDonation_Locator.lst_StartMonth, 2);
                     //Assert.AreEqual("1", -1, "Month not selected", MethodToAddDataInList("Month not selected-"+EnumClasses.LogStatus.Failed));
+                    threadWait(3000);
                     selectValueByIndex(GeneralDonation_Locator.lst_Day, 1);
                     explicitWait(GeneralDonation_Locator.td_FundType, 2000);
                     status = ClickOnElementWhenElementFound(GeneralDonation_Locator.td_FundType);
@@ -101,14 +103,14 @@ namespace AkaNewMedia.Pages
                     MethodToAddDataInList("Enter cardholder name-" + status);
                     status = ClickOnElementWhenElementFound(GeneralDonation_Locator.btn_Main_Continue);
                     MethodToAddDataInList("Click on continue button-" + status);
-                    var assertStatus = AssertIsFalse(GeneralDonation_Locator.lbl_DonorProfile);
+                    var assertStatus = AssertIsTrue(GeneralDonation_Locator.lbl_DonorProfile);
                     if (assertStatus == EnumClasses.LogStatus.Failed)
                     {
                         MethodToAddDataInList("All mandatory fields are not filled-" + assertStatus);
                         ReportFailure("TestFailure", System.Reflection.MethodBase.GetCurrentMethod().Name);
                     }
                     else if (assertStatus != EnumClasses.LogStatus.Failed)
-                        ReportReader.AfterTest(System.Reflection.MethodBase.GetCurrentMethod().Name, lst_detail);
+                        ReportReader.AfterTest(System.Reflection.MethodBase.GetCurrentMethod().Name, lst_detail, dataRow["browsername"].ToString());
                 }
             }
             catch (Exception e)
@@ -229,7 +231,8 @@ namespace AkaNewMedia.Pages
             try
             {
                 lst_detail = new List<string>();
-                status = AssertIsFalse(GeneralDonation_Locator.lbl_TransactionCode);
+                threadWait(3000);
+                status = AssertIsTrue(GeneralDonation_Locator.lbl_TransactionCode);
                 MethodToAddDataInList("Verify the TransectionCode is visible-" + status);
                 status = ClickOnElementWhenElementFound(GeneralDonation_Locator.btn_PaymentStatus_Continue);
                 MethodToAddDataInList("Click on continue button-" + status);

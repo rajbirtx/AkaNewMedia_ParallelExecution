@@ -9,6 +9,13 @@ using System.Threading.Tasks;
 using OpenQA.Selenium.Interactions;
 using AventStack.ExtentReports;
 using NUnit.Framework;
+using System.IO;
+using System.Collections;
+//using ICSharpCode.SharpZipLib.Zip;
+using System.IO.Compression;
+using System.Web;
+using System.Threading;
+//using OpenQA.Selenium.Remote;
 
 namespace AkaNewMedia.CommonRepository
 {
@@ -22,6 +29,7 @@ namespace AkaNewMedia.CommonRepository
 
         public string ScenarioName = string.Empty;
         public string TestCaseName = string.Empty;
+        public static string browserName = string.Empty;
         EnumClasses.LogStatus status;
         public void maximiseBrowser()
         {
@@ -42,6 +50,10 @@ namespace AkaNewMedia.CommonRepository
             {
                 Console.WriteLine(e.ToString());
             }
+        }
+        public void threadWait(int aWaitTimeInSec)
+        {
+            Thread.Sleep(aWaitTimeInSec);
         }
         public bool WaitUntillElementIsVisible(By aByeValue, int timeOut)
         {
@@ -270,7 +282,6 @@ namespace AkaNewMedia.CommonRepository
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("arguments[0].click();", aByValue);
         }
-
         /// <summary>
         /// Desc:Method is used to capture the ScreenShots
         /// </summary>
@@ -279,17 +290,20 @@ namespace AkaNewMedia.CommonRepository
         {
             try
             {
+                DirectoryInfo dirScreenshotPath = new DirectoryInfo(GetScreenshotPath());
+                foreach (FileInfo fi in dirScreenshotPath.GetFiles())
+                {
+                    fi.Delete();
+                }
                 string filename = DateTime.Now.ToString().Replace("/", "_").Replace("-", "_").Replace(":", "_").Replace(" ", "_") + ".jpeg";
-                string path = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
-                string actualPath = path.Substring(0, path.LastIndexOf("bin"));
-                string projectPath = new Uri(actualPath).LocalPath;
-                string finalpath = projectPath + "ScreenShots\\" + filename;
+                string finalpath = @".\TestFramework\ResultReport\Screenshots\" + filename;
                 ITakesScreenshot screenshotDriver = driver as ITakesScreenshot;
                 Screenshot screenshot = screenshotDriver.GetScreenshot();
                 screenshot.SaveAsFile(finalpath, ScreenshotImageFormat.Jpeg);
+                finalpath = "Screenshots//" + filename;
                 return finalpath;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw;
             }
@@ -319,17 +333,64 @@ namespace AkaNewMedia.CommonRepository
             return reportPath;
         }
         /// <summary>
-        /// Desc:Method is used to get generated screenshot's path
+        /// Desc:Method is used to Get Screenshot's Path
         /// </summary>
         /// <returns></returns>
-        public static string GetScreenShotPath()
+        public static string GetScreenshotPath()
+        {
+            string path = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
+            string actualPath = path.Substring(0, path.LastIndexOf("bin"));
+            string screenshotPath = new Uri(actualPath).LocalPath;
+            screenshotPath = screenshotPath + @"ResultReport\Screenshots";
+            return screenshotPath;
+        }
+        /// <summary>
+        /// Desc:Method is used to Get Report Folder's Path
+        /// </summary>
+        /// <returns></returns>
+        public static string GetReportFolderPath()
         {
             string path = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
             string actualPath = path.Substring(0, path.LastIndexOf("bin"));
             string reportPath = new Uri(actualPath).LocalPath;
-            reportPath = reportPath + "ScreenShots";
+            reportPath = reportPath + "ResultReport";
             return reportPath;
         }
+        /// <summary>
+        /// Desc:Method is used to Get zip Folder's Path
+        /// </summary>
+        /// <returns></returns>
+        public static string GetZipFolderPath()
+        {
+            string path = System.Reflection.Assembly.GetCallingAssembly().CodeBase;
+            string actualPath = path.Substring(0, path.LastIndexOf("bin"));
+            string reportPath = new Uri(actualPath).LocalPath;
+            reportPath = reportPath + "ZipFolder";
+            return reportPath;
+        }
+        /// <summary>
+        /// Desc:Method is used to set report into zip file
+        /// </summary>
+        /// <returns></returns>
+        public static void createZipFile()
+        {
+            string reportPath = GetReportFolderPath();
+            string zipFilePath = GetZipFolderPath();
+            bool exists = System.IO.Directory.Exists(reportPath);
+            if (!exists)
+                System.IO.Directory.CreateDirectory(reportPath);
+            addIntoZip(reportPath, zipFilePath);
+        }
+        public static void addIntoZip(string directoryPath, string zipFilePath)
+        {
+            DirectoryInfo dirZipPath = new DirectoryInfo(zipFilePath);
+            foreach (FileInfo fi in dirZipPath.GetFiles())
+            {
+                fi.Delete();
+            }
+            ZipFile.CreateFromDirectory(directoryPath, Path.Combine(zipFilePath, "ExtentReport.zip"), CompressionLevel.Optimal, true);
+        }
+
         /// <summary>
         /// Desc:Method is used to GetExcel path
         /// </summary>
