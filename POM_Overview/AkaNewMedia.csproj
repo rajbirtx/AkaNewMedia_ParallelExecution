@@ -129,35 +129,24 @@
   <ItemGroup>
     <Content Include="bin\Debug\ExtentReports.dll" />
     <Content Include="bin\Debug\HtmlAgilityPack.dll" />
-    <Content Include="bin\Debug\HtmlAgilityPack.pdb" />
-    <Content Include="bin\Debug\HtmlAgilityPack.xml" />
     <Content Include="bin\Debug\ICSharpCode.SharpZipLib.dll" />
     <Content Include="bin\Debug\MongoDB.Bson.dll" />
-    <Content Include="bin\Debug\MongoDB.Bson.xml" />
     <Content Include="bin\Debug\MongoDB.Driver.Core.dll" />
-    <Content Include="bin\Debug\MongoDB.Driver.Core.xml" />
     <Content Include="bin\Debug\MongoDB.Driver.dll" />
-    <Content Include="bin\Debug\MongoDB.Driver.xml" />
     <Content Include="bin\Debug\Newtonsoft.Json.dll" />
-    <Content Include="bin\Debug\Newtonsoft.Json.xml" />
     <Content Include="bin\Debug\NPOI.dll" />
     <Content Include="bin\Debug\NPOI.OOXML.dll" />
     <Content Include="bin\Debug\NPOI.OpenXml4Net.dll" />
     <Content Include="bin\Debug\NPOI.OpenXmlFormats.dll" />
-    <Content Include="bin\Debug\NPOI.xml" />
     <Content Include="bin\Debug\nunit.framework.dll" />
     <Content Include="bin\Debug\POM_Overview.dll" />
     <Content Include="bin\Debug\POM_Overview.pdb" />
     <Content Include="bin\Debug\RazorEngine.dll" />
-    <Content Include="bin\Debug\RazorEngine.xml" />
     <Content Include="bin\Debug\RelevantCodes.ExtentReports.dll" />
     <Content Include="bin\Debug\System.Runtime.InteropServices.RuntimeInformation.dll" />
     <Content Include="bin\Debug\System.Web.Razor.dll" />
-    <Content Include="bin\Debug\System.Web.Razor.xml" />
     <Content Include="bin\Debug\WebDriver.dll" />
     <Content Include="bin\Debug\WebDriver.Support.dll" />
-    <Content Include="bin\Debug\WebDriver.Support.xml" />
-    <Content Include="bin\Debug\WebDriver.xml" />
     <Content Include="extent-config.xml" />
   </ItemGroup>
   <ItemGroup>
