@@ -137,6 +137,8 @@
     <Content Include="bin\Debug\TestFramework.pdb" />
     <Content Include="bin\Debug\WebDriver.dll" />
     <Content Include="bin\Debug\WebDriver.Support.dll" />
+    <Content Include="bin\x64\Debug\TestFramework.dll" />
+    <Content Include="bin\x64\Debug\TestFramework.pdb" />
     <Content Include="Drivers\chromedriver.exe" />
     <Content Include="Drivers\geckodriver.exe" />
     <Content Include="Drivers\IEDriverServer.exe" />

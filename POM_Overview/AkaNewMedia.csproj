@@ -171,6 +171,8 @@
     <Content Include="bin\Debug\System.Web.Razor.dll" />
     <Content Include="bin\Debug\WebDriver.dll" />
     <Content Include="bin\Debug\WebDriver.Support.dll" />
+    <Content Include="bin\x64\Debug\AkaNewMedia.dll" />
+    <Content Include="bin\x64\Debug\AkaNewMedia.pdb" />
     <Content Include="extent-config.xml" />
   </ItemGroup>
   <ItemGroup>
