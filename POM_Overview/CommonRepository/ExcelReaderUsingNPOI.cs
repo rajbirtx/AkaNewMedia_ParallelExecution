@@ -21,14 +21,20 @@ namespace AkaNewMedia.CommonRepository
 
         public ExcelReaderUsingNPOI(string path)
         {
-
-            this.path = path;
             try
             {
-                fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite);
-                workbook = new XSSFWorkbook(fs);
-                sheet = workbook.GetSheetAt(0);
-                fs.Close();
+                this.path = path;
+                try
+                {
+                    fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite);
+                    workbook = new XSSFWorkbook(fs);
+                    sheet = workbook.GetSheetAt(0);
+                    fs.Close();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
             catch (Exception e)
             {
@@ -38,202 +44,229 @@ namespace AkaNewMedia.CommonRepository
 
         public int getRowCount(string sheetName)
         {
-            int index = workbook.GetSheetIndex(sheetName);
-            if (index == -1)
-                return 0;
-            else
+            try
             {
-                sheet = workbook.GetSheetAt(index);
-                int number = sheet.LastRowNum + 1;
-                return number;
+                int index = workbook.GetSheetIndex(sheetName);
+                if (index == -1)
+                    return 0;
+                else
+                {
+                    sheet = workbook.GetSheetAt(index);
+                    int number = sheet.LastRowNum + 1;
+                    return number;
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
             }
         }
 
         public int getColumnCount(string sheetName)
         {
-            if (!isSheetExist(sheetName))
+            try
+            {
+                if (!isSheetExist(sheetName))
+                    return -1;
+                sheet = workbook.GetSheet(sheetName);
+                row = sheet.GetRow(0);
+                if (row == null)
+                    return -1;
+                return row.LastCellNum;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
                 return -1;
-            sheet = workbook.GetSheet(sheetName);
-            row = sheet.GetRow(0);
-            if (row == null)
-                return -1;
-            return row.LastCellNum;
+            }
         }
 
         public int getRowNumber(string sheetName, int colNum, string value)
         {
-            fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite);
-            workbook = new XSSFWorkbook(fs);
-            int d = 0;
-            int index = workbook.GetSheetIndex(sheetName);
-            if (index == -1)
-                return 0;
-
-            sheet = workbook.GetSheetAt(index);
-            for (int rw = 0; rw < sheet.LastRowNum; rw++)
+            try
             {
-                if (sheet.GetRow(rw) != null)
+                fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite);
+                workbook = new XSSFWorkbook(fs);
+                int d = 0;
+                int index = workbook.GetSheetIndex(sheetName);
+                if (index == -1)
+                    return 0;
+
+                sheet = workbook.GetSheetAt(index);
+                for (int rw = 0; rw < sheet.LastRowNum; rw++)
                 {
-                    row = sheet.GetRow(rw);
+                    if (sheet.GetRow(rw) != null)
+                    {
+                        row = sheet.GetRow(rw);
+                    }
                 }
-
+                return row.RowNum;
             }
-
-            return row.RowNum;
-
-
+            catch (Exception)
+            {
+                return row.RowNum;
+            }
         }
 
         public string getCellData(string sheetName, int colNum, int rowNum)
         {
-
-            if (rowNum <= 0)
-                return "";
-            int index = workbook.GetSheetIndex(sheetName);
-            if (index == -1)
-                return "";
-            sheet = workbook.GetSheetAt(index);
-            row = sheet.GetRow(rowNum - 1);
-            if (row == null)
-                return "";
-            cell = row.GetCell(colNum);
-            if (cell == null)
-                return "";
-            if (cell.CellType == CellType.String)
-                return cell.StringCellValue;
-            else if (cell.CellType == CellType.Numeric || cell.CellType == CellType.Formula)
+            try
             {
-                string cellText = Convert.ToString(cell.NumericCellValue);
-                return cellText;
+                if (rowNum <= 0)
+                    return "";
+                int index = workbook.GetSheetIndex(sheetName);
+                if (index == -1)
+                    return "";
+                sheet = workbook.GetSheetAt(index);
+                row = sheet.GetRow(rowNum - 1);
+                if (row == null)
+                    return "";
+                cell = row.GetCell(colNum);
+                if (cell == null)
+                    return "";
+                if (cell.CellType == CellType.String)
+                    return cell.StringCellValue;
+                else if (cell.CellType == CellType.Numeric || cell.CellType == CellType.Formula)
+                {
+                    string cellText = Convert.ToString(cell.NumericCellValue);
+                    return cellText;
+                }
+                else if (cell.CellType == CellType.Blank)
+                    return "";
+                else
+                    return cell.BooleanCellValue.ToString();
             }
-            else if (cell.CellType == CellType.Blank)
+            catch (Exception)
+            {
                 return "";
-            else
-                return cell.BooleanCellValue.ToString();
-
+            }
         }
 
         public string getCellData(string sheetName, string colName, int rowNum)
         {
-            if (rowNum <= 0)
-                return "";
-            int colNum = -1;
-            int index = workbook.GetSheetIndex(sheetName);
-            if (index == -1)
-                return "";
-            sheet = workbook.GetSheetAt(index);
-            row = sheet.GetRow(0);
-            for (int i = 0; i < row.LastCellNum; i++)
+            try
             {
-                if (row.GetCell(i).StringCellValue.Trim().Equals(colName.Trim()))
+                if (rowNum <= 0)
+                    return "";
+                int colNum = -1;
+                int index = workbook.GetSheetIndex(sheetName);
+                if (index == -1)
+                    return "";
+                sheet = workbook.GetSheetAt(index);
+                row = sheet.GetRow(0);
+                for (int i = 0; i < row.LastCellNum; i++)
                 {
-                    colNum = i;
+                    if (row.GetCell(i).StringCellValue.Trim().Equals(colName.Trim()))
+                    {
+                        colNum = i;
+                    }
                 }
+                if (colNum == -1)
+                    return "";
+                sheet = workbook.GetSheetAt(index);
+                row = sheet.GetRow(rowNum - 1);
+                if (row == null)
+                    return "";
+                cell = row.GetCell(colNum);
+                if (cell == null)
+                    return "";
+                if (cell.CellType == CellType.String)
+                    return cell.StringCellValue;
+                else if (cell.CellType == CellType.Numeric || cell.CellType == CellType.Formula)
+                {
+                    string cellText = Convert.ToString(cell.NumericCellValue);
+                    return cellText;
+                }
+                else if (cell.CellType == CellType.Blank)
+                    return "";
+                else
+                    return cell.BooleanCellValue.ToString();
             }
-            if (colNum == -1)
-                return "";
-            sheet = workbook.GetSheetAt(index);
-            row = sheet.GetRow(rowNum - 1);
-            if (row == null)
-                return "";
-            cell = row.GetCell(colNum);
-            if (cell == null)
-                return "";
-            if (cell.CellType == CellType.String)
-                return cell.StringCellValue;
-            else if (cell.CellType == CellType.Numeric || cell.CellType == CellType.Formula)
+            catch (Exception)
             {
-                string cellText = Convert.ToString(cell.NumericCellValue);
-                return cellText;
-            }
-            else if (cell.CellType == CellType.Blank)
                 return "";
-            else
-                return cell.BooleanCellValue.ToString();
+            }
         }
 
         public string setCellData(string sheetName, string colName, int rowNum, string data)
         {
-            fs = new FileStream(path, FileMode.Open, FileAccess.Read);
-            workbook = new XSSFWorkbook(fs);
-            if (rowNum <= 0)
-                return "";
-            int colNum = -1;
-            int index = workbook.GetSheetIndex(sheetName);
-            if (index == -1)
-                return "";
-            sheet = workbook.GetSheetAt(index);
-            row = sheet.GetRow(0);
-            for (int i = 0; i < row.LastCellNum; i++)
+            try
             {
-                if (row.GetCell(i).StringCellValue.Equals(colName))
+                fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+                workbook = new XSSFWorkbook(fs);
+                if (rowNum <= 0)
+                    return "";
+                int colNum = -1;
+                int index = workbook.GetSheetIndex(sheetName);
+                if (index == -1)
+                    return "";
+                sheet = workbook.GetSheetAt(index);
+                row = sheet.GetRow(0);
+                for (int i = 0; i < row.LastCellNum; i++)
                 {
-                    colNum = i;
+                    if (row.GetCell(i).StringCellValue.Equals(colName))
+                    {
+                        colNum = i;
+                    }
                 }
+                if (colNum == -1)
+                    return "";
+                row = sheet.GetRow(rowNum - 1);
+                if (row == null)
+                    row = sheet.CreateRow(rowNum - 1);
+                cell = row.GetCell(colNum);
+                if (cell == null)
+                    cell = row.CreateCell(colNum);
+
+                ICellStyle cs = workbook.CreateCellStyle();
+                cs.WrapText = true;
+                cell.CellStyle = cs;
+                cell.SetCellValue(data);
+
+                FileStream f = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);
+                workbook.Write(f);
+                f.Close();
+                fs.Close();
+                return data;
             }
-            if (colNum == -1)
+            catch (Exception)
+            {
                 return "";
-            row = sheet.GetRow(rowNum - 1);
-            if (row == null)
-                row = sheet.CreateRow(rowNum - 1);
-            cell = row.GetCell(colNum);
-            if (cell == null)
-                cell = row.CreateCell(colNum);
-
-            ICellStyle cs = workbook.CreateCellStyle();
-            cs.WrapText = true;
-            cell.CellStyle = cs;
-            cell.SetCellValue(data);
-
-            FileStream f = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);
-            workbook.Write(f);
-            f.Close();
-            fs.Close();
-
-            return data;
-
+            }
         }
 
         public string setCellData(string sheetName, int colNum, int rowNum, string data)
         {
-            fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite);
-            workbook = new XSSFWorkbook(fs);
-            if (rowNum <= 0)
+            try
+            {
+                fs = new FileStream(path, FileMode.Open, FileAccess.ReadWrite);
+                workbook = new XSSFWorkbook(fs);
+                if (rowNum <= 0)
+                    return "";
+                int index = workbook.GetSheetIndex(sheetName);
+                if (index == -1)
+                    return "";
+                sheet = workbook.GetSheetAt(index);
+                row = sheet.GetRow(rowNum - 1);
+                if (row == null)
+                    row = sheet.CreateRow(rowNum - 1);
+                cell = row.GetCell(colNum);
+                if (cell == null)
+                    cell = row.CreateCell(colNum);
+                ICellStyle cs = workbook.CreateCellStyle();
+                cs.WrapText = true;
+                cell.CellStyle = cs;
+                cell.SetCellValue(data);
+                FileStream f = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);
+                workbook.Write(f);
+                f.Close();
+                fs.Close();
+                return data;
+            }
+            catch (Exception)
+            {
                 return "";
-            int index = workbook.GetSheetIndex(sheetName);
-            if (index == -1)
-                return "";
-            sheet = workbook.GetSheetAt(index);
-            row = sheet.GetRow(rowNum - 1);
-            if (row == null)
-                row = sheet.CreateRow(rowNum - 1);
-            cell = row.GetCell(colNum);
-            if (cell == null)
-                cell = row.CreateCell(colNum);
-
-            //for (int rownum = 1; rownum <= 1000; rownum++)
-            //{
-            //    row = sheet.CreateRow(rownum);
-
-            //        cell = row.CreateCell(colNum-1);
-            //        ICellStyle cs = workbook.CreateCellStyle();
-            //        cs.WrapText = true;
-            //        cell.CellStyle = cs;
-            //        cell.SetCellValue(data);
-
-            //}
-
-            ICellStyle cs = workbook.CreateCellStyle();
-            cs.WrapText = true;
-            cell.CellStyle = cs;
-            cell.SetCellValue(data);
-
-            FileStream f = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);
-            workbook.Write(f);
-            f.Close();
-            fs.Close();
-
-            return data;
+            }          
         }
 
         public bool addSheet(string sheetName)
@@ -275,84 +308,112 @@ namespace AkaNewMedia.CommonRepository
 
         public bool addColumn(string sheetName, string colName)
         {
-            fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            workbook = new XSSFWorkbook(fs);
-            int index = workbook.GetSheetIndex(sheetName);
-            if (index == -1)
-                return false;
-            ICellStyle cs = workbook.CreateCellStyle();
-            sheet = workbook.GetSheetAt(index);
-            row = sheet.GetRow(0);
-            if (row == null)
-                row = sheet.CreateRow(0);
-            cell = row.GetCell(0);
-            if (cell == null)
-                cell = row.CreateCell(0);
-            else
-                cell = row.CreateCell(row.LastCellNum);
-            cell.SetCellValue(colName);
-            cell.CellStyle = cs;
+            try
+            {
+                fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                workbook = new XSSFWorkbook(fs);
+                int index = workbook.GetSheetIndex(sheetName);
+                if (index == -1)
+                    return false;
+                ICellStyle cs = workbook.CreateCellStyle();
+                sheet = workbook.GetSheetAt(index);
+                row = sheet.GetRow(0);
+                if (row == null)
+                    row = sheet.CreateRow(0);
+                cell = row.GetCell(0);
+                if (cell == null)
+                    cell = row.CreateCell(0);
+                else
+                    cell = row.CreateCell(row.LastCellNum);
+                cell.SetCellValue(colName);
+                cell.CellStyle = cs;
 
-            FileStream f = new FileStream(path, FileMode.Create);
-            workbook.Write(f);
-            f.Close();
-            fs.Close();
-            return true;
+                FileStream f = new FileStream(path, FileMode.Create);
+                workbook.Write(f);
+                f.Close();
+                fs.Close();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }          
         }
 
         public bool removeColumn(string sheetName, int colNum)
         {
-            if (!isSheetExist(sheetName))
-                return false;
-            fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            workbook = new XSSFWorkbook(fs);
-            sheet = workbook.GetSheet(sheetName);
-            ICellStyle cs = workbook.CreateCellStyle();
-            for (int i = 0; i < getRowCount(sheetName); i++)
+            try
             {
-                row = sheet.GetRow(i);
-                if (row != null)
+                if (!isSheetExist(sheetName))
+                    return false;
+                fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                workbook = new XSSFWorkbook(fs);
+                sheet = workbook.GetSheet(sheetName);
+                ICellStyle cs = workbook.CreateCellStyle();
+                for (int i = 0; i < getRowCount(sheetName); i++)
                 {
-                    cell = row.GetCell(colNum - 1);
-                    if (cell != null)
+                    row = sheet.GetRow(i);
+                    if (row != null)
                     {
-                        cell.CellStyle = cs;
-                        row.RemoveCell(cell);
+                        cell = row.GetCell(colNum - 1);
+                        if (cell != null)
+                        {
+                            cell.CellStyle = cs;
+                            row.RemoveCell(cell);
+                        }
                     }
                 }
+                FileStream f = new FileStream(path, FileMode.Truncate);
+                workbook.Write(f);
+                f.Close();
+                fs.Close();
+                return true;
             }
-            FileStream f = new FileStream(path, FileMode.Truncate);
-            workbook.Write(f);
-            f.Close();
-            fs.Close();
-            return true;
+            catch (Exception)
+            {
+                return false;
+            }         
         }
 
         public bool isSheetExist(string sheetName)
         {
-            int index = workbook.GetSheetIndex(sheetName);
-            if (index == -1)
+            try
             {
-                index = workbook.GetSheetIndex(sheetName.ToUpper());
+                int index = workbook.GetSheetIndex(sheetName);
                 if (index == -1)
-                    return false;
+                {
+                    index = workbook.GetSheetIndex(sheetName.ToUpper());
+                    if (index == -1)
+                        return false;
+                    else
+                        return true;
+                }
                 else
                     return true;
             }
-            else
-                return true;
+            catch (Exception)
+            {
+                return false;
+            }            
         }
 
         public int getCellRowNum(string sheetName, string colName, string cellValue)
         {
-            for (int i = 0; i < getRowCount(sheetName); i++)
+            try
             {
-                if (getCellData(sheetName, colName, i).Equals(cellValue))
+                for (int i = 0; i < getRowCount(sheetName); i++)
                 {
-                    return i;
+                    if (getCellData(sheetName, colName, i).Equals(cellValue))
+                    {
+                        return i;
+                    }
                 }
+                return -1;
             }
-            return -1;
+            catch (Exception)
+            {
+                return -1;
+            }          
         }
     }
 }

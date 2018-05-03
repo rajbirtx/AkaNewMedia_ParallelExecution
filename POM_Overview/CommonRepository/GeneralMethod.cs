@@ -374,12 +374,19 @@ namespace AkaNewMedia.CommonRepository
         /// <returns></returns>
         public static void createZipFile()
         {
-            string reportPath = GetReportFolderPath();
-            string zipFilePath = GetZipFolderPath();
-            bool exists = System.IO.Directory.Exists(reportPath);
-            if (!exists)
-                System.IO.Directory.CreateDirectory(reportPath);
-            addIntoZip(reportPath, zipFilePath);
+            try
+            {
+                string reportPath = GetReportFolderPath();
+                string zipFilePath = GetZipFolderPath();
+                bool exists = System.IO.Directory.Exists(reportPath);
+                if (!exists)
+                    System.IO.Directory.CreateDirectory(reportPath);
+                addIntoZip(reportPath, zipFilePath);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }           
         }
         public static void addIntoZip(string directoryPath, string zipFilePath)
         {

@@ -38,7 +38,14 @@ namespace TestFramework.TestCases
         }
         public static object[] getData()
         {
-            return DataUtil.getData(xls, EnumClasses.SheetNames.InHonourDonation.ToString());
+            try
+            {
+                return DataUtil.getData(xls, EnumClasses.SheetNames.InHonourDonation.ToString());
+            }
+            catch (Exception)
+            {
+                throw;
+            }          
         }
         [TearDown]
         protected void TearDown()

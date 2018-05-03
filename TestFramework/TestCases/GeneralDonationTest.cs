@@ -21,7 +21,7 @@ namespace TestFramework.TestCases
         public void generalDonation(Dictionary<string, string> data)
         {
             try
-            {              
+            {
                 ExtentTestManager.CreateParentTest(GetType().Name + '-' + data["browsername"].ToString());
                 DataRow dataRow = DriverInitialization(data, EnumClasses.SheetNames.GeneralDonation.ToString());
                 LaunchPage lPage = new LaunchPage(driver);
@@ -41,7 +41,14 @@ namespace TestFramework.TestCases
         }
         public static object[] getData()
         {
-            return DataUtil.getData(xls, EnumClasses.SheetNames.GeneralDonation.ToString());
+            try
+            {
+                return DataUtil.getData(xls, EnumClasses.SheetNames.GeneralDonation.ToString());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         [TearDown]
         protected void TearDown()
